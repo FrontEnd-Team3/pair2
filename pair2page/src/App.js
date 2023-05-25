@@ -5,7 +5,7 @@ import { RouterProvider } from 'react-router-dom'
 function App() {
 	const routing = router
 	return (
-		<div className="App">
+		<div className="Apps">
 			<RouterProvider router={router} />
 		</div>
 	)
