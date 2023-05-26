@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../components/layout'
+import Main from '../pages/main'
 
 const router = createBrowserRouter([
 	{
@@ -7,7 +8,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <div>:)</div>,
+				element: <Main />,
 			},
 			{
 				path: '/skincare',

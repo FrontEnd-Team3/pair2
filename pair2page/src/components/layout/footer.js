@@ -31,7 +31,10 @@ const Footer = () => {
 						<FooterMenu>Terms of Use</FooterMenu>
 						<FooterMenu>Accessibility</FooterMenu>
 						<FooterMenu>Supply Chain Transparency</FooterMenu>
-						<FooterMenu>Your Privacy Choices<img src="img/privacyoptions.png"/></FooterMenu>
+						<FooterMenu>
+							Your Privacy Choices
+							<img src="img/privacyoptions.png" />
+						</FooterMenu>
 					</FooterMenuList>
 					<FooterLogo src="img/footer-img.png" />
 				</FooterBottom>
@@ -45,9 +48,8 @@ export default Footer
 const FooterContainer = styled.div`
 	background-color: #faf2f4;
 	font-size: 14px;
-	position: absolute;
-	bottom: 0;
 	width: 100%;
+	position: absolute;
 `
 
 const FooterTop = styled.div`
