@@ -1,28 +1,23 @@
 import { createBrowserRouter } from 'react-router-dom'
-import Layout from '../components/layout'
-import Main from '../pages/main'
+
+import MainPage from '../components/layout'
 
 const router = createBrowserRouter([
 	{
-		element: <Layout />,
-		children: [
-			{
-				path: '/',
-				element: <Main />,
-			},
-			{
-				path: '/skincare',
-				element: <div>skincare 페이지</div>,
-			},
-			{
-				path: '/makeup',
-				element: <div>makeup 페이지</div>,
-			},
-			{
-				path: '/detail',
-				element: <div>상품 상세페이지</div>,
-			},
-		],
+		path: '/',
+		element: <MainPage />,
+	},
+	{
+		path: '/detail',
+		element: <div>상품 디테일 페이지</div>,
+	},
+	{
+		path: '/skincare',
+		element: <div>스킨케어 상품 리스트 페이지</div>,
+	},
+	{
+		path: '/makeup',
+		element: <div>메이크업 상품 리스트 페이지</div>,
 	},
 ])
 
