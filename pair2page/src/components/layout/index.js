@@ -1,3 +1,4 @@
+
 import Footer from './footer'
 import Header from './header'
 import styled from 'styled-components'
@@ -79,10 +80,12 @@ const MainPage = () => {
 					</tbody>
 				</Table>
 			</NoticeBox>
+
 			<Footer />
 		</>
 	)
 }
+
 
 export default MainPage
 
@@ -133,3 +136,4 @@ const VideoBox = styled.div`
 const NoticeBox = styled.div`
 	background-color: #faf3f4;
 `
+
