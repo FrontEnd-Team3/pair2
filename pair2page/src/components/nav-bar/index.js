@@ -1,23 +1,72 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Collapse, Navbar, Nav, NavItem } from 'reactstrap'
+import { useNav } from '../../context/navcontent'
+import NavDetail from '../../data/navbar-data.json'
 
 const NavBar = args => {
 	const [isOpen, setIsOpen] = useState(false)
+	// const [selectedMenu, setSelectedMenu] = useState('SKINCARE')
+	const { content, setContent, initialValue } = useNav()
+	const selectedVal = useRef(content)
 
-	const handleToggleOpen = () => setIsOpen(true)
-	const handleToggleClose = () => setIsOpen(false)
+	const [headerImage, setHeaderImage] = useState('img/main-logo.png')
+
+	const handleLogoChange = () => {
+		setHeaderImage('img/main-img1.png')
+	}
+
+	const handleLogoReset = () => {
+		setHeaderImage('img/main-logo.png')
+	}
+
+	const handleToggleOpen = e => {
+		// console.log(e.target.id)
+		if (NavDetail.NavMenus.find(el => el.name === e.target.id)) {
+			selectedVal.current = NavDetail.NavMenus.find(
+				el => el.name === e.target.id,
+			)
+			setContent(selectedVal.current)
+		}
+		setIsOpen(true)
+	}
+
+	useEffect(() => {
+		if (content) {
+			selectedVal.current = content
+		} else {
+			selectedVal.current = initialValue
+		}
+	}, [content])
+
+	const handleToggleClose = () => {
+		// setContent(initialValue)
+		setIsOpen(false)
+	}
 	return (
 		<Container>
 			<Navbar {...args}>
-				<HeaderLogo src="img/main-logo.png" />
-				<CenterMenuList onMouseEnter={handleToggleOpen}>
-					<EachMenu>SKINCARE</EachMenu>
-					<EachMenu>MAKEUP</EachMenu>
-					<EachMenu>BODY</EachMenu>
-					<EachMenu>FRAGRANCE</EachMenu>
-					<EachMenu>GLOSSIWEAR</EachMenu>
-					<EachMenu>SETS</EachMenu>
+				<HeaderLogo
+					src={headerImage}
+					onMouseEnter={handleLogoChange}
+					onMouseLeave={handleLogoReset}
+				/>
+				<CenterMenuList>
+					<EachMenu onMouseEnter={handleToggleOpen} id="SKINCARE">
+						SKINCARE
+					</EachMenu>
+					<EachMenu onMouseEnter={handleToggleOpen} id="MAKEUP">
+						MAKEUP
+					</EachMenu>
+					<EachMenu onMouseEnter={handleToggleOpen} id="BODY">
+						BODY
+					</EachMenu>
+					<EachMenu onMouseEnter={handleToggleOpen} id="FRAGRANCE">
+						FRAGRANCE
+					</EachMenu>
+					<EachMenu onMouseEnter={handleToggleOpen} id="SETS">
+						SETS
+					</EachMenu>
 				</CenterMenuList>
 				<HeaderBottom>
 					<HeaderMenuList>
@@ -53,11 +102,21 @@ const NavBar = args => {
 								</NavContents>
 							</NavItem>
 							<NavItem>
-								{/* 마우스 올라간 메뉴마다 다른 상세 메뉴 보이도록! */}
-								detail
-							</NavItem>
-							<NavItem>
-								<NavImage src="img/menu-dropdown-img0.png" />
+								{/* <OneNav selectedMenu={selectedMenu} /> */}
+								<OneContainer>
+									<Lists>
+										{selectedVal.current.menulist.map((menu, i) => (
+											<List key={i}>{menu}</List>
+										))}
+									</Lists>
+									<div>
+										<NavImage src={selectedVal.current.imageURL} />
+										<NavImageInfo>
+											{selectedVal.current.imageDescription}
+											<Arrow src="img/arrow.png" />
+										</NavImageInfo>
+									</div>
+								</OneContainer>
 							</NavItem>
 						</NavContainer>
 					</Nav>
@@ -109,7 +168,6 @@ const NavContents = styled.div`
 	font-size: 15px;
 	line-height: 5px;
 	margin-bottom: 50px;
-
 	font-weight: 300;
 	letter-spacing: -0.5px;
 `
@@ -133,8 +191,42 @@ const HeaderButton = styled.button`
 		text-decoration: underline 1px;
 	}
 `
+//
+
+const OneContainer = styled.div`
+	display: flex;
+`
+
+const Lists = styled.ul`
+	width: 800px;
+	list-style: none;
+	font-size: 15px;
+
+	font-weight: 300;
+`
+
+const List = styled.li`
+	:hover {
+		text-decoration: underline 0.5px;
+	}
+`
 
 const NavImage = styled.img`
 	width: 221px;
 	height: 276px;
+`
+
+const NavImageInfo = styled.p`
+	margin-top: 10px;
+	font-size: 14px;
+	:hover {
+		text-decoration: underline 0.5px;
+	}
+`
+
+const Arrow = styled.img`
+	position: absolute;
+	right: 30px;
+	width: 15px;
+	height: 15px;
 `
