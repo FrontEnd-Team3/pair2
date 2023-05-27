@@ -1,10 +1,16 @@
-
 import Footer from './footer'
 import Header from './header'
 import styled from 'styled-components'
 import { Table } from 'reactstrap'
+import faker from 'faker'
 
 const MainPage = () => {
+	console.log(faker)
+	const fakerUsers = Array.from({ length: 5 }, () => ({
+		name: faker.name.findName(),
+		date: faker.date.past().toString(),
+	}))
+
 	return (
 		<>
 			<Header />
@@ -59,24 +65,16 @@ const MainPage = () => {
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-						</tr>
+						{fakerUsers.map((fake, index) => {
+							return (
+								<tr key={index}>
+									<th scope="row">{index + 1}</th>
+									<td>title</td>
+									<td>{fake.date}</td>
+									<td>@{fake.name}</td>
+								</tr>
+							)
+						})}
 					</tbody>
 				</Table>
 			</NoticeBox>
@@ -85,7 +83,6 @@ const MainPage = () => {
 		</>
 	)
 }
-
 
 export default MainPage
 
@@ -136,4 +133,3 @@ const VideoBox = styled.div`
 const NoticeBox = styled.div`
 	background-color: #faf3f4;
 `
-
