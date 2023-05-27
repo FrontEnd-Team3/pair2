@@ -22,16 +22,15 @@ function Header() {
 			</HeaderTop>
 			<NavBar />
 		</HeaderContainer>
-
 	)
 }
 
 export default Header
 
-
 const HeaderContainer = styled.div`
-	position: fixed;
+	position: absolute;
 	width: 100%;
+	top: 0;
 `
 
 const HeaderTop = styled.div`
