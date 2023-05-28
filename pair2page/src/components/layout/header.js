@@ -1,17 +1,6 @@
 import styled from 'styled-components'
 import NavBar from '../nav-bar'
-// import NavBar from '../nav-bar'
 
-// const Header = () => {
-// 	return (
-// 		<>
-//
-//
-// 		</>
-// 	)
-// }
-
-// export default Header
 
 function Header() {
 	return (
