@@ -20,6 +20,7 @@ const NavBar = args => {
 	const { content, setContent, initialValue } = useNav()
 	const selectedVal = useRef(content)
 
+	// 마우스 올리면 헤더 로고 이미지 변경되는 효과 구현
 	const [headerImage, setHeaderImage] = useState(MainLogo1)
 
 	const handleLogoChange = () => {
@@ -30,6 +31,7 @@ const NavBar = args => {
 		setHeaderImage(MainLogo1)
 	}
 
+	// ReactStrap을 사용한 navbar > 마우스 올리면 해당 값에 맞게 내부 컨텐츠 변화하는 효과 구현
 	const handleToggleOpen = e => {
 		// console.log(e.target.id)
 		if (NavDetail.NavMenus.find(el => el.name === e.target.id)) {
@@ -49,6 +51,7 @@ const NavBar = args => {
 		}
 	}, [content])
 
+	// 마우스가 navbar 영역을 벗어나면 닫히도록 하는 함수
 	const handleToggleClose = () => {
 		// setContent(initialValue)
 		setIsOpen(false)
