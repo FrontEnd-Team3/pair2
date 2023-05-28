@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import NavStoreProvider from './context/navcontent'
 import Layout from './components/layout'
 import MainPage from './pages/main'
-import ProductDetailPage from './pages/detail_product'
+import ProductDetailPage from './pages/product-list'
 
 function App() {
 	// const routing = router
