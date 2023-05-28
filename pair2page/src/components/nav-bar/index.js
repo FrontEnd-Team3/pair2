@@ -13,6 +13,7 @@ import MakeupImage from '../../img/MAKEUP.jpg'
 import BodyImage from '../../img/BODY.jpg'
 import FragranceImage from '../../img/FRAGRANCE.jpg'
 import SetsImage from '../../img/SETS.jpg'
+import { useNavigate } from 'react-router-dom'
 
 const NavBar = args => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -64,6 +65,13 @@ const NavBar = args => {
 		FragranceImage,
 		SetsImage,
 	]
+
+	// 클릭 시 해당 상품 목록 페이지로 이동하도록 하는 함수
+	const navigate = useNavigate()
+	const handlePageChange = productName => {
+		const targetProduct = productName.toLowerCase()
+		navigate(`/product/${targetProduct}`)
+	}
 
 	return (
 		<Container>
@@ -123,7 +131,9 @@ const NavBar = args => {
 									<p>You Look Good Cap</p>
 								</NavContents>
 							</NavItem>
-							<NavItem>
+							<NavItem
+								onClick={() => handlePageChange(selectedVal.current.name)}
+							>
 								{/* <OneNav selectedMenu={selectedMenu} /> */}
 								<OneContainer>
 									<Lists>

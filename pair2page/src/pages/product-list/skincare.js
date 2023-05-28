@@ -1,9 +1,10 @@
 import styled from 'styled-components'
+import { MockProductsDetail } from '../../data/faker'
 
 const Skincare = () => {
+	console.log(MockProductsDetail(2, 'fashion'))
 	return (
 		<>
-			<ul>{}</ul>
 			<Box>
 				The page for skincare products.
 				<img src="img/footer-img.png" />
