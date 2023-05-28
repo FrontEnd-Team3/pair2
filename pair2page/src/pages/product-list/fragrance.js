@@ -1,16 +1,34 @@
 import styled from 'styled-components'
+import { MockProductsDetail } from '../../data/faker'
 
 const Fragrance = () => {
+	const fragranceProducts = MockProductsDetail(24, 'nature')
 	return (
-		<>
-			<ul>{}</ul>
-			<Box>The page for fragrance products.</Box>
-		</>
+		<Box>
+			<ProductContainer>
+				<ProductBox>상품1</ProductBox>
+				<ProductBox>상품2</ProductBox>
+				<ProductBox>상품3</ProductBox>
+				<ProductBox>상품4</ProductBox>
+			</ProductContainer>
+		</Box>
 	)
 }
 
 export default Fragrance
 
 const Box = styled.div`
-	height: 800px;
+	position: absolute;
+	top: 100px;
+	width: 100%;
+	z-index: -1;
+`
+
+const ProductContainer = styled.div`
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+`
+
+const ProductBox = styled.div`
+	border: solid 1px black;
 `

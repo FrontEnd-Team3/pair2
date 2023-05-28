@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import NavBar from '../nav-bar'
 
-
 function Header() {
 	return (
 		<HeaderContainer>

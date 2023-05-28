@@ -77,6 +77,7 @@ const NavBar = args => {
 		<Container>
 			<Navbar {...args}>
 				<HeaderLogo
+					on
 					src={headerImage}
 					onMouseEnter={handleLogoChange}
 					onMouseLeave={handleLogoReset}
@@ -162,6 +163,7 @@ export default NavBar
 
 const Container = styled.div`
 	background-color: white;
+	z-index: 100;
 `
 
 const HeaderBottom = styled.div`
