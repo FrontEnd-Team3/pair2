@@ -4,22 +4,34 @@ import { Collapse, Navbar, Nav, NavItem } from 'reactstrap'
 import { useNav } from '../../context/navcontent'
 import NavDetail from '../../data/navbar-data.json'
 
+// image
+import MainLogo1 from '../../img/main-logo.png'
+import MainLogo2 from '../../img/main-img1.png'
+import ArrowImage from '../../img/arrow.png'
+import SkincareImage from '../../img/SKINCARE.jpg'
+import MakeupImage from '../../img/MAKEUP.jpg'
+import BodyImage from '../../img/BODY.jpg'
+import FragranceImage from '../../img/FRAGRANCE.jpg'
+import SetsImage from '../../img/SETS.jpg'
+
 const NavBar = args => {
 	const [isOpen, setIsOpen] = useState(false)
 	// const [selectedMenu, setSelectedMenu] = useState('SKINCARE')
 	const { content, setContent, initialValue } = useNav()
 	const selectedVal = useRef(content)
 
-	const [headerImage, setHeaderImage] = useState('img/main-logo.png')
+	// 마우스 올리면 헤더 로고 이미지 변경되는 효과 구현
+	const [headerImage, setHeaderImage] = useState(MainLogo1)
 
 	const handleLogoChange = () => {
-		setHeaderImage('img/main-img1.png')
+		setHeaderImage(MainLogo2)
 	}
 
 	const handleLogoReset = () => {
-		setHeaderImage('img/main-logo.png')
+		setHeaderImage(MainLogo1)
 	}
 
+	// ReactStrap을 사용한 navbar > 마우스 올리면 해당 값에 맞게 내부 컨텐츠 변화하는 효과 구현
 	const handleToggleOpen = e => {
 		// console.log(e.target.id)
 		if (NavDetail.NavMenus.find(el => el.name === e.target.id)) {
@@ -39,10 +51,20 @@ const NavBar = args => {
 		}
 	}, [content])
 
+	// 마우스가 navbar 영역을 벗어나면 닫히도록 하는 함수
 	const handleToggleClose = () => {
 		// setContent(initialValue)
 		setIsOpen(false)
 	}
+
+	const ImageArray = [
+		SkincareImage,
+		MakeupImage,
+		BodyImage,
+		FragranceImage,
+		SetsImage,
+	]
+
 	return (
 		<Container>
 			<Navbar {...args}>
@@ -110,10 +132,10 @@ const NavBar = args => {
 										))}
 									</Lists>
 									<div>
-										<NavImage src={selectedVal.current.imageURL} />
+										<NavImage src={ImageArray[selectedVal.current.id]} />
 										<NavImageInfo>
 											{selectedVal.current.imageDescription}
-											<Arrow src="img/arrow.png" />
+											<Arrow src={ArrowImage} />
 										</NavImageInfo>
 									</div>
 								</OneContainer>

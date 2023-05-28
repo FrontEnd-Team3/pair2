@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import footerLogo from '../../img/footer-img.png'
+import privacyChoiceLogo from '../../img/privacyoptions.png'
 
 const Footer = () => {
 	return (
@@ -33,10 +35,10 @@ const Footer = () => {
 						<FooterMenu>Supply Chain Transparency</FooterMenu>
 						<FooterMenu>
 							Your Privacy Choices
-							<img src="img/privacyoptions.png" />
+							<img src={privacyChoiceLogo} />
 						</FooterMenu>
 					</FooterMenuList>
-					<FooterLogo src="img/footer-img.png" />
+					<FooterLogo src={footerLogo} />
 				</FooterBottom>
 			</FooterContainer>
 		</>
