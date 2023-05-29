@@ -1,8 +1,11 @@
 import styled from 'styled-components'
 import { MockProductsDetail } from '../../data/faker'
 import { Box, Grid } from 'grommet'
+import exampleImg from '../../img/FRAGRANCE.jpg'
+import { useCart } from '../../context/cart'
 
 const Fragrance = () => {
+	const { cartCount, setCartCount } = useCart()
 	const fragranceProducts = MockProductsDetail(24, 'nature')
 	return (
 		<ContentsBox>
@@ -39,7 +42,23 @@ const Fragrance = () => {
 					{ name: 'box24', start: [3, 5], end: [3, 5] },
 				]}
 			>
-				<Box gridArea="box1" background="light-5"></Box>
+				<Box gridArea="box1" background="white">
+					<div>
+						<div>
+							<ProductImg src={exampleImg} />
+						</div>
+						<ProductTop>
+							<div>상품명</div>
+							<div>상품가격</div>
+						</ProductTop>
+						<ProductBottom>상품 디테일</ProductBottom>
+						<div>
+							<AddToBagBtn onClick={() => setCartCount(cartCount + 1)}>
+								Add to bag
+							</AddToBagBtn>
+						</div>
+					</div>
+				</Box>
 				<Box gridArea="box2" background="light-5"></Box>
 				<Box gridArea="box3" background="light-5"></Box>
 				<Box gridArea="box4" background="light-5"></Box>
@@ -74,4 +93,30 @@ const ContentsBox = styled.div`
 	margin-top: -400px;
 	width: 100%;
 	z-index: -1;
+	font-size: 14px;
+`
+const ProductImg = styled.img`
+	width: 359px;
+	height: 449px;
+`
+const ProductTop = styled.div`
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 0 0;
+	font-weight: bold;
+`
+const ProductBottom = styled.div`
+	color: #666666;
+	margin-bottom: 52px;
+`
+const AddToBagBtn = styled.button`
+	width: 359px;
+	height: 40px;
+	background-color: white;
+	border: none;
+	border-right: 0.5px solid black;
+	border-bottom: 0.5px solid black;
+	:hover {
+		border: 1px dashed black;
+	}
 `

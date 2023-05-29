@@ -14,6 +14,7 @@ import BodyImage from '../../img/BODY.jpg'
 import FragranceImage from '../../img/FRAGRANCE.jpg'
 import SetsImage from '../../img/SETS.jpg'
 import { useNavigate } from 'react-router-dom'
+import { useCart } from '../../context/cart'
 
 const NavBar = args => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -73,6 +74,9 @@ const NavBar = args => {
 		navigate(`/product/${targetProduct}`)
 	}
 
+	// 장바구니
+	const { cartCount } = useCart()
+
 	return (
 		<Container>
 			<Navbar {...args}>
@@ -81,6 +85,7 @@ const NavBar = args => {
 					src={headerImage}
 					onMouseEnter={handleLogoChange}
 					onMouseLeave={handleLogoReset}
+					onClick={() => navigate('/')}
 				/>
 				<CenterMenuList>
 					<EachMenu onMouseEnter={handleToggleOpen} id="SKINCARE">
@@ -109,7 +114,7 @@ const NavBar = args => {
 						</li>
 						{/* 장바구니에 담긴 수는 나중에 전역 변수 생성하고 추가하기 */}
 						<li>
-							<HeaderButton>BAG(0)</HeaderButton>
+							<HeaderButton>BAG({cartCount})</HeaderButton>
 						</li>
 					</HeaderMenuList>
 				</HeaderBottom>

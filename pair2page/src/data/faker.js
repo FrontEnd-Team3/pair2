@@ -6,15 +6,14 @@ const randomId = {
 }
 
 // 상품 상세 정보 생성 함수
-export const MockProductsDetail = (count, cate) =>
+export const MockProductsDetail = count =>
 	Array(count)
 		.fill()
 		.map(() => ({
 			id: randomId.generate(),
-			product: faker.commerce.productName(),
+			productName: faker.commerce.productName(),
 			productDetail: faker.commerce.productName(),
 			description: faker.commerce.productDescription(),
-			imageURL: faker.image.urlLoremFlickr({ category: { cate } }),
 			price: faker.commerce.price({
 				min: 100,
 				max: 1000,
