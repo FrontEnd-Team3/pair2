@@ -7,33 +7,33 @@ import Layout from './components/layout'
 import MainPage from './pages/main'
 import ProductDetailPage from './pages/product-list'
 import CartStoreProvider from './context/cart'
+import { Provider } from 'react-redux'
+import { store } from './store/store'
+import ProductCartProvider from './context/one-product'
+import DetailProductPage from './pages/detail-product'
 
 function App() {
-	// const routing = router
 	return (
-		<CartStoreProvider>
-			<NavStoreProvider>
-				{/* <div className="Apps">
-				<RouterProvider router={routing} />
-			</div> */}
-				<BrowserRouter>
-					<Routes>
-						<Route element={<Layout />}>
-							<Route path="/" element={<MainPage />} />
-							<Route path="/detail" element={<div>상품 디테일 페이지</div>} />
-							<Route
-								path="/product/:category"
-								element={<ProductDetailPage />}
-							/>
-							<Route
-								path="/makeup"
-								element={<div>메이크업 상품 리스트 페이지</div>}
-							/>
-						</Route>
-					</Routes>
-				</BrowserRouter>
-			</NavStoreProvider>
-		</CartStoreProvider>
+		<Provider store={store}>
+			<ProductCartProvider>
+				<CartStoreProvider>
+					<NavStoreProvider>
+						<BrowserRouter>
+							<Routes>
+								<Route element={<Layout />}>
+									<Route path="/" element={<MainPage />} />
+									<Route path="/detail/:id" element={<DetailProductPage />} />
+									<Route
+										path="/product/:category"
+										element={<ProductDetailPage />}
+									/>
+								</Route>
+							</Routes>
+						</BrowserRouter>
+					</NavStoreProvider>
+				</CartStoreProvider>
+			</ProductCartProvider>
+		</Provider>
 	)
 }
 

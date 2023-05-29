@@ -2,11 +2,18 @@ import styled from 'styled-components'
 import { MockProductsDetail } from '../../data/faker'
 import { Box, Grid } from 'grommet'
 import { useCart } from '../../context/cart'
-import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'
+import { useProduct } from '../../context/one-product'
+import { useNavigate } from 'react-router-dom'
 
 const Sets = () => {
 	const { cartCount, setCartCount } = useCart()
 	const setsProducts = MockProductsDetail(24)
+	const { setTargetProduct } = useProduct()
+	const navigate = useNavigate()
+	const handlePageChange = (product, id) => {
+		setTargetProduct(product)
+		navigate(`/detail/${id}`)
+	}
 	return (
 		<ContentsBox>
 			<Grid
@@ -42,53 +49,17 @@ const Sets = () => {
 					{ name: 'box24', start: [3, 5], end: [3, 5] },
 				]}
 			>
-				{/* <Box gridArea={'box' + 1} background="white">
-					<div>
-						<div>
-							<ProductImg src={exampleImg} />
-						</div>
-						<ProductTop>
-							<div>상품명</div>
-							<div>상품가격</div>
-						</ProductTop>
-						<ProductBottom>상품 디테일</ProductBottom>
-						<div>
-							<AddToBagBtn onClick={() => setCartCount(cartCount + 1)}>
-								Add to bag
-							</AddToBagBtn>
-						</div>
-					</div>
-				</Box>
-				<Box gridArea="box2" background="light-5"></Box>
-				<Box gridArea="box3" background="light-5"></Box>
-				<Box gridArea="box4" background="light-5"></Box>
-				<Box gridArea="box5" background="light-5"></Box>
-				<Box gridArea="box6" background="light-5"></Box>
-				<Box gridArea="box7" background="light-5"></Box>
-				<Box gridArea="box8" background="light-5"></Box>
-				<Box gridArea="box9" background="light-5"></Box>
-				<Box gridArea="box10" background="light-5"></Box>
-				<Box gridArea="box11" background="light-5"></Box>
-				<Box gridArea="box12" background="light-5"></Box>
-				<Box gridArea="box13" background="light-5"></Box>
-				<Box gridArea="box14" background="light-5"></Box>
-				<Box gridArea="box15" background="light-5"></Box>
-				<Box gridArea="box16" background="light-5"></Box>
-				<Box gridArea="box17" background="light-5"></Box>
-				<Box gridArea="box18" background="light-5"></Box>
-				<Box gridArea="box19" background="light-5"></Box>
-				<Box gridArea="box20" background="light-5"></Box>
-				<Box gridArea="box21" background="light-5"></Box>
-				<Box gridArea="box22" background="light-5"></Box>
-				<Box gridArea="box23" background="light-5"></Box>
-				<Box gridArea="box24" background="light-5"></Box> */}
 				{setsProducts.map((product, i) => (
-					<Box gridArea={'box' + (i + 1)} background="white">
+					<Box
+						gridArea={'box' + (i + 1)}
+						background="white"
+						onClick={() => {
+							handlePageChange(product, product.id)
+						}}
+					>
 						<div>
 							<div>
-								<ProductImg
-									src={faker.image.urlPicsumPhotos({ grayscale: true })}
-								/>
+								<ProductImg src={product.imageURL} />
 							</div>
 							<ProductTop>
 								<div>{product.productName}</div>

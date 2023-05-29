@@ -51,6 +51,10 @@
 		"eslint-plugin-prettier": "^4.2.1",
 		"eslint-plugin-unused-imports": "^2.0.0",
 		"faker": "^5.5.3",
-		"prettier": "2.8.8"
+		"prettier": "2.8.8",
+		"react-redux": "^8.0.5",
+		"redux": "^4.2.1",
+		"redux-devtools-extension": "^2.13.9",
+		"redux-logger": "^3.0.6"
 	}
 }
