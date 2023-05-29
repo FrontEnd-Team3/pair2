@@ -1,5 +1,7 @@
-import { Table } from 'reactstrap'
 import styled from 'styled-components'
+import CarouselBox from '../../components/carousel'
+import Imgbox from '../../components/img-box'
+import Notice from '../../components/notice'
 
 const MainPage = () => {
 	return (
@@ -17,14 +19,7 @@ const MainPage = () => {
 					<div>SKIN FIRST</div>
 					<div>MAKEUP SECOND</div>
 				</div>
-				<SubMainImgBox>
-					<img src="img/sub-menu-img-skincare.jpg" />
-					<img src="img/sub-menu-img-makeup.jpg" />
-				</SubMainImgBox>
-				<div>
-					<div>Shop Skincare</div>
-					<div>Shop Makeup</div>
-				</div>
+				<Imgbox />
 			</SubMainBox>
 			<div>
 				<div>
@@ -41,41 +36,9 @@ const MainPage = () => {
 			</div>
 			<div>
 				<p>FEATURED PRODUCTS</p>
-				<div>이미지 캐루셀</div>
+				<CarouselBox />
 			</div>
-			<NoticeBox className="notice-board">
-				<h1>Notice Board</h1>
-				<Table hover>
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Title</th>
-							<th>Date</th>
-							<th>Username</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-						</tr>
-					</tbody>
-				</Table>
-			</NoticeBox>
+			<Notice />
 		</>
 	)
 }
@@ -125,8 +88,4 @@ const VideoBox = styled.div`
 	video {
 		width: 900px;
 	}
-`
-
-const NoticeBox = styled.div`
-	background-color: #faf3f4;
 `
