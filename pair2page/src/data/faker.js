@@ -28,6 +28,8 @@ export const MockProductsDetail = (count, cate) =>
 						id: randomId.generate(),
 						user: faker.lorem.word(),
 						contents: faker.lorem.paragraph(),
+						title: faker.lorem.sentence({ min: 10, max: 14 }),
+						title2: faker.lorem.sentence({ min: 80, max: 90 }),
 						isMine: false,
 						writtenDate: faker.date.past() + ' ' + faker.date.weekday(),
 					}
