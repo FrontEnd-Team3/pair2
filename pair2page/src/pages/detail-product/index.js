@@ -1,58 +1,72 @@
 import styled from 'styled-components'
 import { useProduct } from '../../context/one-product'
-import { Data, DataSearch, DataTable, StarRating, Toolbar } from 'grommet'
+import { Data, DataSearch, DataTable, Toolbar } from 'grommet'
 import { useCart } from '../../context/cart'
+import { useReviewModal } from '../../context/review-modal'
+import AddReviewModal from '../../components/modal/add-review'
 
 const DetailProductPage = () => {
-	const { targetProduct, setTargetProduct } = useProduct()
+	const { targetProduct } = useProduct()
 	const { cartCount, setCartCount } = useCart()
-	console.log(targetProduct.Comments.length)
+	const ratingCount = Math.floor(targetProduct.AverageRating)
+	const { isOpenModal, handleModalOpen } = useReviewModal()
+
 	if (targetProduct) {
 		return (
-			<ContentsBox>
-				<ProductTop>
-					<ProductImage src={targetProduct.imageURL} />
-					<div>
-						<ProductNameBox>{targetProduct.productName}</ProductNameBox>
-						<ProductDetailBox>{targetProduct.productDetail}</ProductDetailBox>
-						<StarRating />
+			<>
+				{isOpenModal && <AddReviewModal />}
+				<ContentsBox>
+					<ProductTop>
+						<ProductImage src={targetProduct.imageURL} />
 						<div>
-							<AddToBagBtn onClick={() => setCartCount(cartCount + 1)}>
-								Add to bag {targetProduct.price}
-							</AddToBagBtn>
+							<ProductNameBox>{targetProduct.productName}</ProductNameBox>
+							<ProductDetailBox>{targetProduct.productDetail}</ProductDetailBox>
+							<Rating>{'★'.repeat(ratingCount)}</Rating>
+							<div>
+								<AddToBagBtn onClick={() => setCartCount(cartCount + 1)}>
+									Add to bag {targetProduct.price}
+								</AddToBagBtn>
+							</div>
+							<hr />
+							<DescriptionSummaryBox>
+								{targetProduct.descriptionSummary}
+							</DescriptionSummaryBox>
+							<div>{targetProduct.description}</div>
 						</div>
-						<hr />
-						<DescriptionSummaryBox>
-							{targetProduct.descriptionSummary}
-						</DescriptionSummaryBox>
-						<div>{targetProduct.description}</div>
-					</div>
-				</ProductTop>
-				<ReviewBox>
-					<ReviewTitle>REVIEWS</ReviewTitle>
-					<ReviewContents>
-						<div>
-							<HighlightText>{targetProduct.Comments.length}</HighlightText>
-							<p>Total Reviews</p>
-						</div>
-						<div>
-							<HighlightText>
-								{targetProduct.AverageRating}
-								<span>
-									{'⭐'.repeat(Math.floor(targetProduct.AverageRating))}
-								</span>
-							</HighlightText>
-							<div>Average Rating</div>
-						</div>
-					</ReviewContents>
-					<Data data={targetProduct.Comments}>
-						<Toolbar>
-							<DataSearch />
-						</Toolbar>
-						<DataTable />
-					</Data>
-				</ReviewBox>
-			</ContentsBox>
+					</ProductTop>
+					<ReviewBox>
+						<ReviewTitle>REVIEWS</ReviewTitle>
+						<ReviewContents>
+							<div>
+								<HighlightText>{targetProduct.CommentsCount}</HighlightText>
+								<p>Total Reviews</p>
+							</div>
+							<div>
+								<HighlightText>
+									{targetProduct.AverageRating}
+									<span>{'⭐'.repeat(ratingCount)}</span>
+								</HighlightText>
+								<div>Average Rating</div>
+							</div>
+						</ReviewContents>
+						<Data data={targetProduct.Comments}>
+							<Toolbar>
+								<DataSearch />
+								<ModalOpenButton onClick={() => handleModalOpen()}>
+									WRITE
+								</ModalOpenButton>
+							</Toolbar>
+							<DataTable
+								background={{
+									// header: 'dark-2',
+									body: ['white', 'light-2'],
+									footer: { dark: 'light-2', light: 'dark-3' },
+								}}
+							/>
+						</Data>
+					</ReviewBox>
+				</ContentsBox>
+			</>
 		)
 	}
 }
@@ -86,6 +100,9 @@ const ProductNameBox = styled.div`
 const ProductDetailBox = styled.div`
 	font-size: 16px;
 	margin-bottom: 20px;
+`
+const Rating = styled.div`
+	font-size: 20px;
 `
 
 const AddToBagBtn = styled.button`
@@ -133,4 +150,14 @@ const HighlightText = styled.div`
 	span {
 		font-size: 16px;
 	}
+`
+
+// 리뷰 추가 부분
+const ModalOpenButton = styled.button`
+	background-color: salmon;
+	color: white;
+	border: none;
+	height: 47.6px;
+	width: 100px;
+	margin-left: 1100px;
 `

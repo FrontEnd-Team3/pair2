@@ -11,28 +11,31 @@ import { Provider } from 'react-redux'
 import { store } from './store/store'
 import ProductCartProvider from './context/one-product'
 import DetailProductPage from './pages/detail-product'
+import ReviewModalProvider from './context/review-modal'
 
 function App() {
 	return (
 		<Provider store={store}>
-			<ProductCartProvider>
-				<CartStoreProvider>
-					<NavStoreProvider>
-						<BrowserRouter>
-							<Routes>
-								<Route element={<Layout />}>
-									<Route path="/" element={<MainPage />} />
-									<Route path="/detail/:id" element={<DetailProductPage />} />
-									<Route
-										path="/product/:category"
-										element={<ProductDetailPage />}
-									/>
-								</Route>
-							</Routes>
-						</BrowserRouter>
-					</NavStoreProvider>
-				</CartStoreProvider>
-			</ProductCartProvider>
+			<ReviewModalProvider>
+				<ProductCartProvider>
+					<CartStoreProvider>
+						<NavStoreProvider>
+							<BrowserRouter>
+								<Routes>
+									<Route element={<Layout />}>
+										<Route path="/" element={<MainPage />} />
+										<Route path="/detail/:id" element={<DetailProductPage />} />
+										<Route
+											path="/product/:category"
+											element={<ProductDetailPage />}
+										/>
+									</Route>
+								</Routes>
+							</BrowserRouter>
+						</NavStoreProvider>
+					</CartStoreProvider>
+				</ProductCartProvider>
+			</ReviewModalProvider>
 		</Provider>
 	)
 }

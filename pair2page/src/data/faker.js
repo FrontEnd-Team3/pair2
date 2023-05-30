@@ -14,6 +14,30 @@ export const MockProductsDetail = count => {
 				grayscale: true,
 			}),
 		)
+	const commentsArray = Array(Math.floor(Math.random() * 20) + 1)
+		.fill()
+		.map(() => {
+			return {
+				id: randomId.generate(),
+				writtenDate:
+					faker.finance.amount({ min: 22, max: 23, dec: 0 }) +
+					'.' +
+					faker.finance.amount({ min: 1, max: 12, dec: 0 }) +
+					'.' +
+					faker.finance.amount({ min: 1, max: 30, dec: 0 }),
+				user: faker.lorem.word(),
+				userLocation:
+					'(' +
+					faker.location.cityName() +
+					', ' +
+					faker.location.country() +
+					')',
+				rating: '⭐'.repeat(faker.finance.amount({ min: 1, max: 5, dec: 0 })),
+				title: faker.lorem.words({ min: 2, max: 4 }),
+				contents: faker.lorem.sentence({ min: 3, max: 5 }),
+				isMine: false,
+			}
+		})
 	return Array(count)
 		.fill()
 		.map((_, i) => ({
@@ -29,32 +53,8 @@ export const MockProductsDetail = count => {
 				dec: 0,
 				symbol: '$',
 			}),
-			AverageRating: faker.finance.amount({ min: 0, max: 5, dec: 2 }),
-			Comments: Array(Math.floor(Math.random() * 5) + 1)
-				.fill()
-				.map(() => {
-					return {
-						id: randomId.generate(),
-						writtenDate:
-							faker.finance.amount({ min: 22, max: 23, dec: 0 }) +
-							'.' +
-							faker.finance.amount({ min: 1, max: 12, dec: 0 }) +
-							'.' +
-							faker.finance.amount({ min: 1, max: 30, dec: 0 }),
-						user: faker.lorem.word(),
-						userLocation:
-							'(' +
-							faker.location.cityName() +
-							', ' +
-							faker.location.country() +
-							')',
-						rating: '⭐'.repeat(
-							faker.finance.amount({ min: 1, max: 5, dec: 0 }),
-						),
-						title: faker.lorem.words({ min: 2, max: 4 }),
-						contents: faker.lorem.sentence({ min: 3, max: 5 }),
-						isMine: false,
-					}
-				}),
+			AverageRating: faker.finance.amount({ min: 1, max: 5, dec: 2 }),
+			Comments: commentsArray,
+			CommentsCount: commentsArray.length,
 		}))
 }
