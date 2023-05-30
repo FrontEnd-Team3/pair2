@@ -50,22 +50,22 @@ const Sets = () => {
 				]}
 			>
 				{setsProducts.map((product, i) => (
-					<Box
-						gridArea={'box' + (i + 1)}
-						background="white"
-						onClick={() => {
-							handlePageChange(product, product.id)
-						}}
-					>
+					<Box gridArea={'box' + (i + 1)} background="white">
 						<div>
-							<div>
-								<ProductImg src={product.imageURL} />
+							<div
+								onClick={() => {
+									handlePageChange(product, product.id)
+								}}
+							>
+								<div>
+									<ProductImg src={product.imageURL} />
+								</div>
+								<ProductTop>
+									<div>{product.productName}</div>
+									<div>{product.price}</div>
+								</ProductTop>
+								<ProductBottom>{product.productDetail}</ProductBottom>
 							</div>
-							<ProductTop>
-								<div>{product.productName}</div>
-								<div>{product.price}</div>
-							</ProductTop>
-							<ProductBottom>{product.productDetail}</ProductBottom>
 							<div>
 								<AddToBagBtn onClick={() => setCartCount(cartCount + 1)}>
 									Add to bag

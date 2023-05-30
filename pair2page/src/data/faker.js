@@ -20,7 +20,8 @@ export const MockProductsDetail = count => {
 			id: randomId.generate(),
 			productName: faker.commerce.productName(),
 			productDetail: faker.commerce.productName(),
-			description: faker.commerce.productDescription(),
+			descriptionSummary: faker.company.catchPhrase(),
+			description: faker.lorem.paragraphs(12),
 			imageURL: imageArray[i],
 			price: faker.commerce.price({
 				min: 100,
@@ -28,17 +29,31 @@ export const MockProductsDetail = count => {
 				dec: 0,
 				symbol: '$',
 			}),
+			AverageRating: faker.finance.amount({ min: 0, max: 5, dec: 2 }),
 			Comments: Array(Math.floor(Math.random() * 5) + 1)
 				.fill()
 				.map(() => {
 					return {
 						id: randomId.generate(),
+						writtenDate:
+							faker.finance.amount({ min: 22, max: 23, dec: 0 }) +
+							'.' +
+							faker.finance.amount({ min: 1, max: 12, dec: 0 }) +
+							'.' +
+							faker.finance.amount({ min: 1, max: 30, dec: 0 }),
 						user: faker.lorem.word(),
-						contents: faker.lorem.paragraph(),
-						title: faker.lorem.sentence({ min: 10, max: 14 }),
-						title2: faker.lorem.sentence({ min: 80, max: 90 }),
+						userLocation:
+							'(' +
+							faker.location.cityName() +
+							', ' +
+							faker.location.country() +
+							')',
+						rating: '⭐'.repeat(
+							faker.finance.amount({ min: 1, max: 5, dec: 0 }),
+						),
+						title: faker.lorem.words({ min: 2, max: 4 }),
+						contents: faker.lorem.sentence({ min: 3, max: 5 }),
 						isMine: false,
-						writtenDate: faker.date.past() + ' ' + faker.date.weekday(),
 					}
 				}),
 		}))
