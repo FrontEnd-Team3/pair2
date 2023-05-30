@@ -1,13 +1,11 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Button, Table } from 'reactstrap'
 import styled from 'styled-components'
 import OnePost from '../one-post'
 
 const Notice = () => {
 	const postData = useSelector(data => data.post)
-
-	const dispatch = useDispatch()
 
 	const [selectedPostId, setSelectedPostId] = useState(null)
 
@@ -21,40 +19,42 @@ const Notice = () => {
 	}
 
 	return (
-		<NoticeBox className="notice-board">
-			<NoticeHeader>
-				<h1>Notice Board</h1>
-				<Button>new post</Button>
-			</NoticeHeader>
-			<Table hover>
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Title</th>
-						<th>Date</th>
-						<th>Username</th>
-					</tr>
-				</thead>
-				<tbody>
-					{postData.map((data, index) => (
-						<>
-							<tr
-								key={index}
-								onClick={() => {
-									handdleDetailOpen(data.id)
-								}}
-							>
-								<th scope="row">{index + 1}</th>
-								<td>{data.title}</td>
-								<td>{data.date}</td>
-								<td>@{data.user}</td>
-							</tr>
-							{selectedPostId === data.id && <OnePost data={data} />}
-						</>
-					))}
-				</tbody>
-			</Table>
-		</NoticeBox>
+		<>
+			<NoticeBox className="notice-board">
+				<NoticeHeader>
+					<h1>Notice Board</h1>
+					<Button>new post</Button>
+				</NoticeHeader>
+				<Table hover>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Title</th>
+							<th>Date</th>
+							<th>Username</th>
+						</tr>
+					</thead>
+					<tbody>
+						{postData.map((data, index) => (
+							<>
+								<tr
+									key={index}
+									onClick={() => {
+										handdleDetailOpen(data.id)
+									}}
+								>
+									<th scope="row">{index + 1}</th>
+									<td>{data.title}</td>
+									<td>{data.date}</td>
+									<td>@{data.user}</td>
+								</tr>
+								{selectedPostId === data.id && <OnePost data={data} />}
+							</>
+						))}
+					</tbody>
+				</Table>
+			</NoticeBox>
+		</>
 	)
 }
 

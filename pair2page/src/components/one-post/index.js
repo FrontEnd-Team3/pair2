@@ -1,28 +1,73 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { Button, Input } from 'reactstrap'
 import styled from 'styled-components'
-import OneComments from '../one-comments'
+import { MockProductsDetail } from '../../data/faker'
 
 const OnePost = ({ data }) => {
-	const [commentsInputValue, setCommentsInputValue] = useState('@you:')
-	const dispatch = useDispatch()
-
-	const handleChange = event => {
-		event.preventDefault()
-		setCommentsInputValue(event.target.value)
-		console.log(commentsInputValue)
-	}
+	const [commentList, setCommentList] = useState([])
+	const [commentsData, setCommentsData] = useState(MockProductsDetail(4))
+	const [commentsState, setCommentsState] = useState(false)
+	const [commentInputValue, setCommentInputValue] = useState('')
+	const [editingCommentIndex, setEditingCommentIndex] = useState(-1)
+	const [editedCommentValue, setEditedCommentValue] = useState('')
 
 	const handleAddComments = event => {
+		if (commentInputValue === '') {
+			return
+		}
 		event.preventDefault()
-		dispatch({
-			type: 'ADD_COMMENT',
-			payload: {
-				id: data.id,
-				title2: commentsInputValue,
-			},
-		})
+		setCommentsState(true)
+		setCommentList([commentInputValue, ...commentList])
+		setCommentInputValue('')
+	}
+
+	const handleDeleteComments = index => {
+		const newCommentList = [...commentList]
+		newCommentList.splice(index, 1)
+		setCommentList(newCommentList)
+	}
+
+	const renderNewComments = () => {
+		return commentList.map((comment, index) => (
+			<DetailCommentsText key={index} id={data.id}>
+				<td>id: @{data.user}</td>
+				<td colSpan={2}>
+					{editingCommentIndex === index ? (
+						<Input
+							value={editedCommentValue}
+							onChange={event => setEditedCommentValue(event.target.value)}
+						/>
+					) : (
+						`⎿comments: ${comment}`
+					)}
+				</td>
+				<td>
+					{editingCommentIndex === index ? (
+						<Button onClick={() => handleSaveComment(index)}>SAVE</Button>
+					) : (
+						<>
+							<Button onClick={() => handleEditComment(index)}>EDIT</Button>
+							<Button onClick={() => handleDeleteComments(index)}>
+								DELETE
+							</Button>
+						</>
+					)}
+				</td>
+			</DetailCommentsText>
+		))
+	}
+
+	const handleEditComment = index => {
+		setEditingCommentIndex(index)
+		setEditedCommentValue(commentList[index])
+	}
+
+	const handleSaveComment = index => {
+		const newCommentList = [...commentList]
+		newCommentList[index] = editedCommentValue
+		setCommentList(newCommentList)
+		setEditingCommentIndex(-1)
+		setEditedCommentValue('')
 	}
 
 	return (
@@ -43,15 +88,21 @@ const OnePost = ({ data }) => {
 				<td colSpan={3}>
 					<Input
 						name="comment"
-						value={commentsInputValue}
-						onChange={handleChange}
+						value={commentInputValue}
+						onChange={event => setCommentInputValue(event.target.value)}
 					/>
 				</td>
 				<td colSpan={1}>
 					<Button onClick={handleAddComments}>ADD</Button>
 				</td>
 			</DetailText>
-			<OneComments data={data} />
+			{commentsState && renderNewComments()}
+			{commentsData.map((data, index) => (
+				<DetailCommentsText key={index}>
+					<td>id: @{data.Comments[0].user}</td>
+					<td colSpan={3}>⎿comments: {data.Comments[0].title}</td>
+				</DetailCommentsText>
+			))}
 		</>
 	)
 }
@@ -63,5 +114,9 @@ const TitleText = styled.div`
 	text-align: center;
 `
 const DetailText = styled.tr`
+	background-color: white;
+`
+
+const DetailCommentsText = styled.tr`
 	background-color: white;
 `
