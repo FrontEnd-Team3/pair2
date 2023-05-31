@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 const ProductList = () => {
 	const { cartCount, setCartCount } = useCart()
-	const setsProducts = MockProductsDetail(24)
+	const products = MockProductsDetail(24)
 	const { setTargetProduct } = useProduct()
 	const navigate = useNavigate()
 	const handlePageChange = (product, id) => {
@@ -48,7 +48,7 @@ const ProductList = () => {
 				{ name: 'box24', start: [3, 5], end: [3, 5] },
 			]}
 		>
-			{setsProducts.map((product, i) => (
+			{products.map((product, i) => (
 				<Box gridArea={'box' + (i + 1)} background="white">
 					<div>
 						<div
