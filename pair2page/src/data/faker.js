@@ -14,7 +14,7 @@ export const MockProductsDetail = count => {
 				grayscale: true,
 			}),
 		)
-	const commentsArray = Array(Math.floor(Math.random() * 20) + 1)
+	const commentsArray = Array(Math.floor(Math.random() * 10) + 1)
 		.fill()
 		.map(() => {
 			return {
