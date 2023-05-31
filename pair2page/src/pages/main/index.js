@@ -7,35 +7,22 @@ const MainPage = () => {
 	return (
 		<>
 			<MainImgBox>
-				<div>
-					<p>New! You Look Good Cap</p>
-					<p>A wearable ode to self-love and self-expression.</p>
-					<div>Shop now</div>
-				</div>
 				<img src="img/main-img1.png" />
 			</MainImgBox>
 			<SubMainBox>
-				<div>
+				<TextBox>
 					<div>SKIN FIRST</div>
 					<div>MAKEUP SECOND</div>
-				</div>
+				</TextBox>
 				<Imgbox />
 			</SubMainBox>
 			<div>
-				<div>
-					<p>OUR FRAGRANCES</p>
-					<p>
-						Your favorite scents that will grow with you no matter where you are
-						in your personal evolution.
-					</p>
-					<div>Shop fragrances</div>
-				</div>
 				<VideoBox>
 					<video src="img/main-video.mp4" loop autoPlay muted />
 				</VideoBox>
 			</div>
 			<div>
-				<p>FEATURED PRODUCTS</p>
+				<TextBox>FEATURED PRODUCTS</TextBox>
 				<CarouselBox />
 			</div>
 			<Notice />
@@ -46,7 +33,11 @@ const MainPage = () => {
 export default MainPage
 
 const MainImgBox = styled.div`
+
+margin-top: 20px;
+
 	background-image: url(../../img/main-img2.jpg);
+
 	background-size: 100%;
 	img {
 		width: 100%;
@@ -72,10 +63,17 @@ const MainImgBox = styled.div`
 `
 
 const SubMainBox = styled.div`
-	margin-top: 160px;
+	margin-top: 20px;
+	margin-top: 50px;
 `
 
-const SubMainTextBox1 = styled.div``
+const TextBox = styled.div`
+	margin-top: 20px;
+	flex-direction: row;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`
 
 const SubMainImgBox = styled.div`
 	img {
@@ -85,6 +83,10 @@ const SubMainImgBox = styled.div`
 const SubMainTextBox2 = styled.div``
 
 const VideoBox = styled.div`
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	video {
 		width: 900px;
 	}

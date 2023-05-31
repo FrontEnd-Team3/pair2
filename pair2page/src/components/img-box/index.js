@@ -1,3 +1,4 @@
+import { Button } from 'reactstrap'
 import styled from 'styled-components'
 
 const Imgbox = () => {
@@ -7,10 +8,10 @@ const Imgbox = () => {
 				<img src="img/sub-menu-img-skincare.jpg" />
 				<img src="img/sub-menu-img-makeup.jpg" />
 			</SubMainImgBox>
-			<div>
-				<div>Shop Skincare</div>
-				<div>Shop Makeup</div>
-			</div>
+			<SubMainText>
+				<Button>Shop Skincare</Button>
+				<Button>Shop Makeup</Button>
+			</SubMainText>
 		</>
 	)
 }
@@ -18,7 +19,19 @@ const Imgbox = () => {
 export default Imgbox
 
 const SubMainImgBox = styled.div`
+	flex-direction: row;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	img {
 		width: 600px;
 	}
+`
+
+const SubMainText = styled.div`
+	flex-direction: row;
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
 `
