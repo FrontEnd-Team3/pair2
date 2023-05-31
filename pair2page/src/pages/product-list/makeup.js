@@ -1,16 +1,30 @@
 import styled from 'styled-components'
+import ProductList from '../../components/product-list'
 
 const Makeup = () => {
 	return (
-		<>
-			<ul>{}</ul>
-			<Box>The page for makeup products.</Box>
-		</>
+		<ContentsBox>
+			<ListTop>MAKEUP</ListTop>
+			<ProductList />
+		</ContentsBox>
 	)
 }
 
 export default Makeup
 
-const Box = styled.div`
-	height: 800px;
+const ContentsBox = styled.div`
+	margin-top: -400px;
+	width: 100%;
+	z-index: -1;
+	font-size: 14px;
+`
+const ListTop = styled.div`
+	background-color: #f7f7f7;
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	font-size: 25px;
+	line-height: 50px;
+	font-weight: bold;
+	color: darkgray;
 `

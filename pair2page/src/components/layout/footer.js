@@ -51,7 +51,9 @@ const FooterContainer = styled.div`
 	background-color: #faf2f4;
 	font-size: 14px;
 	width: 100%;
-	position: absolute;
+	height: 344px;
+	position: relative;
+	bottom: 0;
 `
 
 const FooterTop = styled.div`

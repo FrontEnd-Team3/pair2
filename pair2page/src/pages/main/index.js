@@ -33,8 +33,11 @@ const MainPage = () => {
 export default MainPage
 
 const MainImgBox = styled.div`
+
 margin-top: 20px;
-	background-image: url(img/main-img2.jpg);
+
+	background-image: url(../../img/main-img2.jpg);
+
 	background-size: 100%;
 	img {
 		width: 100%;
