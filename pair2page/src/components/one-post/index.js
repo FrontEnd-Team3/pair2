@@ -99,8 +99,8 @@ const OnePost = ({ data }) => {
 			{commentsState && renderNewComments()}
 			{commentsData.map((data, index) => (
 				<DetailCommentsText key={index}>
-					<td>id: @{data.Comments[0].user}</td>
-					<td colSpan={3}>⎿comments: {data.Comments[0].title}</td>
+					<td>id: @{data.Comments2[0].user}</td>
+					<td colSpan={3}>⎿comments: {data.Comments2[0].title}</td>
 				</DetailCommentsText>
 			))}
 		</>

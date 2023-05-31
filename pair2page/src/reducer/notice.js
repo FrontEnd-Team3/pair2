@@ -1,14 +1,14 @@
-import { MockPostDetail } from '../data/faker'
+import { MockProductsDetail } from '../data/faker'
 
-const noticeData = MockPostDetail(12)
+const noticeData = MockProductsDetail(12)
 
 const initialState = noticeData.map(data => ({
 	id: data.id,
-	user: data.Comments[0].user,
-	title: data.Comments[0].title,
-	title2: data.Comments[0].title2,
-	content: data.Comments[0].contents,
-	date: data.Comments[0].writtenDate,
+	user: data.Comments2[0].user,
+	title: data.Comments2[0].title,
+	title2: data.Comments2[0].title2,
+	content: data.Comments2[0].contents,
+	date: data.Comments2[0].writtenDate,
 	state: false,
 }))
 
