@@ -1,42 +1,54 @@
 import styled from 'styled-components'
 import { StarRating } from 'grommet'
+import { faker } from 'https://cdn.skypack.dev/@faker-js/faker'
 
 const AddReviewModal = props => {
-	const { setIsOpenModal } = props
-
-	const handleTitle = e => {
-		console.log(e)
-	}
-
-	const handleContents = e => {
-		console.log(e)
-	}
-
+	const { setIsOpenModal, comments, setComments } = props
 	const handleSubmit = e => {
-		console.log('hi')
+		e.preventDefault()
+		console.log(e.target.title.value)
+		console.log(e.target.contents.value)
+		setComments([
+			...comments,
+			{
+				id: Math.floor(Math.random() * 100000 + 1),
+				writtenDate:
+					faker.finance.amount({ min: 22, max: 23, dec: 0 }) +
+					'.' +
+					faker.finance.amount({ min: 1, max: 12, dec: 0 }) +
+					'.' +
+					faker.finance.amount({ min: 1, max: 30, dec: 0 }),
+				user: faker.lorem.word(),
+				userLocation:
+					'(' +
+					faker.location.cityName() +
+					', ' +
+					faker.location.country() +
+					')',
+				rating: '⭐'.repeat(faker.finance.amount({ min: 1, max: 5, dec: 0 })),
+				title: e.target.title.value,
+				contents: e.target.contents.value,
+				isMine: true,
+			},
+		])
+		setIsOpenModal(false)
 	}
 	return (
 		<>
 			<Wrapper onClick={() => setIsOpenModal(prev => !prev)}></Wrapper>
 			<ModalContainer>
 				<ModalContent>
-					<h5>Add Your Review</h5>
-					<StarRating name="rating" />
-					<ContentsBox>
-						<TitleBox
-							name="title"
-							placeholder="title"
-							onChange={handleTitle()}
-						/>
-					</ContentsBox>
-					<ContentsBox>
-						<textarea
-							name="contents"
-							placeholder="contents"
-							onChange={handleContents}
-						/>
-					</ContentsBox>
-					<SubmitButton onClick={() => handleSubmit()}>SUBMIT</SubmitButton>
+					<form onSubmit={handleSubmit}>
+						<h5>Add Your Review</h5>
+						<StarRating />
+						<ContentsBox>
+							<TitleBox name="title" placeholder="title" />
+						</ContentsBox>
+						<ContentsBox>
+							<textarea name="contents" placeholder="contents" />
+						</ContentsBox>
+						<SubmitButton type="submit">SUBMIT</SubmitButton>
+					</form>
 				</ModalContent>
 			</ModalContainer>
 		</>
@@ -55,7 +67,7 @@ const Wrapper = styled.div`
 const ModalContainer = styled.div`
 	z-index: 1001;
 	width: 500px;
-	height: 350px;
+	height: 400px;
 	position: fixed;
 	top: 42%;
 	left: 48%;
@@ -99,7 +111,7 @@ const TitleBox = styled.input`
 	border-bottom: solid 0.5px black;
 `
 const ContentsBox = styled.div`
-	margin: 20px 0;
+	margin: 10px 0;
 	width: 400px;
 `
 const SubmitButton = styled.button`

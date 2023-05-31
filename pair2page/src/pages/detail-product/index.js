@@ -4,6 +4,7 @@ import { Data, DataSearch, DataTable, Toolbar } from 'grommet'
 import { useCart } from '../../context/cart'
 import AddReviewModal from '../../components/modal/add-review'
 import { useEffect, useState } from 'react'
+import { MockComments } from '../../data/faker'
 
 const DetailProductPage = () => {
 	const { targetProduct } = useProduct()
@@ -12,10 +13,14 @@ const DetailProductPage = () => {
 	const ratingCount = Math.floor(targetProduct.AverageRating)
 	const [isOpenModal, setIsOpenModal] = useState(false)
 
+	const commentsArray = MockComments(Math.floor(Math.random() * 10) + 1)
+	const [comments, setComments] = useState(commentsArray)
+
 	// 모달창을 닫지 않은 채로 페이지를 나갔을 경우, 다른 페이지를 열었을 때 모달창이 닫힌 상태로 페이지가 열리게 하는 함수
 	useEffect(() => {
 		setIsOpenModal(false)
 	}, [])
+
 	if (targetProduct) {
 		return (
 			<>
@@ -23,6 +28,8 @@ const DetailProductPage = () => {
 					<AddReviewModal
 						isOpenModal={isOpenModal}
 						setIsOpenModal={setIsOpenModal}
+						comments={comments}
+						setComments={setComments}
 					/>
 				)}
 				<ContentsBox>
@@ -48,7 +55,7 @@ const DetailProductPage = () => {
 						<ReviewTitle>REVIEWS</ReviewTitle>
 						<ReviewContents>
 							<div>
-								<HighlightText>{targetProduct.CommentsCount}</HighlightText>
+								<HighlightText>{comments.length}</HighlightText>
 								<p>Total Reviews</p>
 							</div>
 							<div>
@@ -59,7 +66,7 @@ const DetailProductPage = () => {
 								<div>Average Rating</div>
 							</div>
 						</ReviewContents>
-						<Data data={targetProduct.Comments}>
+						<Data data={comments}>
 							<Toolbar>
 								<DataSearch />
 								<ModalOpenButton onClick={() => setIsOpenModal(prev => !prev)}>
