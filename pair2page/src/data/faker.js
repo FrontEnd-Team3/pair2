@@ -56,5 +56,18 @@ export const MockProductsDetail = count => {
 			AverageRating: faker.finance.amount({ min: 1, max: 5, dec: 2 }),
 			Comments: commentsArray,
 			CommentsCount: commentsArray.length,
+			Comments2: Array(Math.floor(Math.random() * 5) + 1)
+				.fill()
+				.map(() => {
+					return {
+						id: randomId.generate(),
+						user: faker.lorem.word(),
+						contents: faker.lorem.paragraph(),
+						title: faker.lorem.sentence({ min: 10, max: 14 }),
+						title2: faker.lorem.sentence({ min: 80, max: 90 }),
+						isMine: false,
+						writtenDate: faker.date.past() + ' ' + faker.date.weekday(),
+					}
+				}),
 		}))
 }

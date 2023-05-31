@@ -2,19 +2,29 @@ import styled from 'styled-components'
 import { useProduct } from '../../context/one-product'
 import { Data, DataSearch, DataTable, Toolbar } from 'grommet'
 import { useCart } from '../../context/cart'
-import { useReviewModal } from '../../context/review-modal'
 import AddReviewModal from '../../components/modal/add-review'
+import { useEffect, useState } from 'react'
 
 const DetailProductPage = () => {
 	const { targetProduct } = useProduct()
 	const { cartCount, setCartCount } = useCart()
+	// 별점 평균을 나타내는 숫자 (소수점 두 자리까지) 받아와서 소수점 이하를 버린 값만큼 별 출력
 	const ratingCount = Math.floor(targetProduct.AverageRating)
-	const { isOpenModal, handleModalOpen } = useReviewModal()
+	const [isOpenModal, setIsOpenModal] = useState(false)
 
+	// 모달창을 닫지 않은 채로 페이지를 나갔을 경우, 다른 페이지를 열었을 때 모달창이 닫힌 상태로 페이지가 열리게 하는 함수
+	useEffect(() => {
+		setIsOpenModal(false)
+	}, [])
 	if (targetProduct) {
 		return (
 			<>
-				{isOpenModal && <AddReviewModal />}
+				{isOpenModal && (
+					<AddReviewModal
+						isOpenModal={isOpenModal}
+						setIsOpenModal={setIsOpenModal}
+					/>
+				)}
 				<ContentsBox>
 					<ProductTop>
 						<ProductImage src={targetProduct.imageURL} />
@@ -27,7 +37,7 @@ const DetailProductPage = () => {
 									Add to bag {targetProduct.price}
 								</AddToBagBtn>
 							</div>
-							<hr />
+							<DivisionLine>.</DivisionLine>
 							<DescriptionSummaryBox>
 								{targetProduct.descriptionSummary}
 							</DescriptionSummaryBox>
@@ -52,13 +62,12 @@ const DetailProductPage = () => {
 						<Data data={targetProduct.Comments}>
 							<Toolbar>
 								<DataSearch />
-								<ModalOpenButton onClick={() => handleModalOpen()}>
+								<ModalOpenButton onClick={() => setIsOpenModal(prev => !prev)}>
 									WRITE
 								</ModalOpenButton>
 							</Toolbar>
 							<DataTable
 								background={{
-									// header: 'dark-2',
 									body: ['white', 'light-2'],
 									footer: { dark: 'light-2', light: 'dark-3' },
 								}}
@@ -118,6 +127,14 @@ const AddToBagBtn = styled.button`
 		border: 1px dashed black;
 	}
 `
+const DivisionLine = styled.div`
+	color: white;
+	width: 100%;
+	border: none;
+	border-bottom: 0.1px solid black;
+	margin-bottom: 10px;
+`
+
 const DescriptionSummaryBox = styled.div`
 	font-weight: bold;
 	font-size: 16px;

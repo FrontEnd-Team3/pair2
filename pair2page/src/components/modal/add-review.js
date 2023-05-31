@@ -1,24 +1,42 @@
 import styled from 'styled-components'
-import { useReviewModal } from '../../context/review-modal'
 import { StarRating } from 'grommet'
 
-const AddReviewModal = () => {
-	const { handleModalOpen, setAddedValue } = useReviewModal()
+const AddReviewModal = props => {
+	const { setIsOpenModal } = props
 
+	const handleTitle = e => {
+		console.log(e)
+	}
+
+	const handleContents = e => {
+		console.log(e)
+	}
+
+	const handleSubmit = e => {
+		console.log('hi')
+	}
 	return (
 		<>
-			<Wrapper onClick={() => handleModalOpen()}></Wrapper>
+			<Wrapper onClick={() => setIsOpenModal(prev => !prev)}></Wrapper>
 			<ModalContainer>
 				<ModalContent>
 					<h5>Add Your Review</h5>
 					<StarRating name="rating" />
 					<ContentsBox>
-						<TitleBox name="title" placeholder="title" />
+						<TitleBox
+							name="title"
+							placeholder="title"
+							onChange={handleTitle()}
+						/>
 					</ContentsBox>
 					<ContentsBox>
-						<textarea name="contents" placeholder="contents" />
+						<textarea
+							name="contents"
+							placeholder="contents"
+							onChange={handleContents}
+						/>
 					</ContentsBox>
-					<SubmitButton type="submit">SUBMIT</SubmitButton>
+					<SubmitButton onClick={() => handleSubmit()}>SUBMIT</SubmitButton>
 				</ModalContent>
 			</ModalContainer>
 		</>
