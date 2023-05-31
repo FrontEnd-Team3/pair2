@@ -49,7 +49,7 @@ const ProductList = () => {
 			]}
 		>
 			{products.map((product, i) => (
-				<Box gridArea={'box' + (i + 1)} background="white">
+				<Box key={i} gridArea={'box' + (i + 1)} background="white">
 					<div>
 						<div
 							onClick={() => {

@@ -11,15 +11,15 @@ import { Provider } from 'react-redux'
 import { store } from './store/store'
 import ProductCartProvider from './context/one-product'
 import DetailProductPage from './pages/detail-product'
-import ReviewModalProvider from './context/review-modal'
+import ReviewsCartProvider from './context/reviews'
 
 function App() {
 	return (
 		<Provider store={store}>
-			<ReviewModalProvider>
-				<ProductCartProvider>
-					<CartStoreProvider>
-						<NavStoreProvider>
+			<ProductCartProvider>
+				<CartStoreProvider>
+					<NavStoreProvider>
+						<ReviewsCartProvider>
 							<BrowserRouter>
 								<Routes>
 									<Route element={<Layout />}>
@@ -32,10 +32,10 @@ function App() {
 									</Route>
 								</Routes>
 							</BrowserRouter>
-						</NavStoreProvider>
-					</CartStoreProvider>
-				</ProductCartProvider>
-			</ReviewModalProvider>
+						</ReviewsCartProvider>
+					</NavStoreProvider>
+				</CartStoreProvider>
+			</ProductCartProvider>
 		</Provider>
 	)
 }
