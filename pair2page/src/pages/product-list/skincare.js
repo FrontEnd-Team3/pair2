@@ -1,20 +1,30 @@
 import styled from 'styled-components'
-import { MockProductsDetail } from '../../data/faker'
+import ProductList from '../../components/product-list'
 
 const Skincare = () => {
-	console.log(MockProductsDetail(2, 'fashion'))
 	return (
-		<>
-			<Box>
-				The page for skincare products.
-				<img src="img/footer-img.png" />
-			</Box>
-		</>
+		<ContentsBox>
+			<ListTop>SKINCARE</ListTop>
+			<ProductList />
+		</ContentsBox>
 	)
 }
 
 export default Skincare
 
-const Box = styled.div`
-	height: 800px;
+const ContentsBox = styled.div`
+	margin-top: -400px;
+	width: 100%;
+	z-index: -1;
+	font-size: 14px;
+`
+const ListTop = styled.div`
+	background-color: #f7f7f7;
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	font-size: 25px;
+	line-height: 50px;
+	font-weight: bold;
+	color: darkgray;
 `
