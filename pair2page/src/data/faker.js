@@ -10,7 +10,7 @@ export const MockPostDetail = count => {
 		.fill()
 		.map((_, i) => ({
 			id: randomId.generate(),
-			Comments: Array(Math.floor(Math.random() * 10) + 1)
+			Comments: Array(count)
 				.fill()
 				.map(() => {
 					return {
@@ -22,18 +22,10 @@ export const MockPostDetail = count => {
 							'.' +
 							faker.finance.amount({ min: 1, max: 30, dec: 0 }),
 						user: faker.lorem.word(),
-						userLocation:
-							'(' +
-							faker.location.cityName() +
-							', ' +
-							faker.location.country() +
-							')',
-						rating: '⭐'.repeat(
-							faker.finance.amount({ min: 1, max: 5, dec: 0 }),
-						),
 						title: faker.lorem.words({ min: 2, max: 4 }),
+						title2: faker.lorem.words({ min: 2, max: 4 }),
 						contents: faker.lorem.sentence({ min: 3, max: 5 }),
-						state: false,
+						isMine: false,
 					}
 				}),
 		}))
