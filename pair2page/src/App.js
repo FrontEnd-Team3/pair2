@@ -11,7 +11,6 @@ import { Provider } from 'react-redux'
 import { store } from './store/store'
 import ProductCartProvider from './context/one-product'
 import DetailProductPage from './pages/detail-product'
-import ReviewsCartProvider from './context/reviews'
 
 function App() {
 	return (
@@ -19,20 +18,18 @@ function App() {
 			<ProductCartProvider>
 				<CartStoreProvider>
 					<NavStoreProvider>
-						<ReviewsCartProvider>
-							<BrowserRouter>
-								<Routes>
-									<Route element={<Layout />}>
-										<Route path="/" element={<MainPage />} />
-										<Route path="/detail/:id" element={<DetailProductPage />} />
-										<Route
-											path="/product/:category"
-											element={<ProductDetailPage />}
-										/>
-									</Route>
-								</Routes>
-							</BrowserRouter>
-						</ReviewsCartProvider>
+						<BrowserRouter>
+							<Routes>
+								<Route element={<Layout />}>
+									<Route path="/" element={<MainPage />} />
+									<Route path="/detail/:id" element={<DetailProductPage />} />
+									<Route
+										path="/product/:category"
+										element={<ProductDetailPage />}
+									/>
+								</Route>
+							</Routes>
+						</BrowserRouter>
 					</NavStoreProvider>
 				</CartStoreProvider>
 			</ProductCartProvider>

@@ -71,3 +71,30 @@ export const MockProductsDetail = count => {
 				}),
 		}))
 }
+
+export const MockComments = count => {
+	return Array(count)
+		.fill()
+		.map(() => {
+			return {
+				id: randomId.generate(),
+				writtenDate:
+					faker.finance.amount({ min: 22, max: 23, dec: 0 }) +
+					'.' +
+					faker.finance.amount({ min: 1, max: 12, dec: 0 }) +
+					'.' +
+					faker.finance.amount({ min: 1, max: 30, dec: 0 }),
+				user: faker.lorem.word(),
+				userLocation:
+					'(' +
+					faker.location.cityName() +
+					', ' +
+					faker.location.country() +
+					')',
+				rating: '⭐'.repeat(faker.finance.amount({ min: 1, max: 5, dec: 0 })),
+				title: faker.lorem.words({ min: 2, max: 4 }),
+				contents: faker.lorem.sentence({ min: 3, max: 5 }),
+				isMine: false,
+			}
+		})
+}
