@@ -14,17 +14,6 @@ const initialState = noticeData.map(data => ({
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-		case 'ADD_COMMENT':
-			const newComment = state.map(item => {
-				if (item.id === action.payload.id) {
-					return {
-						...item,
-						title2: [...item.title2, action.payload.title2],
-					}
-				}
-				return item
-			})
-			return newComment
 		default:
 			return state
 	}
