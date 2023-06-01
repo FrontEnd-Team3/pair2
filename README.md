@@ -58,12 +58,13 @@ https://www.glossier.com/
 <br/>
 
 
-### 📋이번 프로젝트에서 사용해본 외부 스타일 라이브러리 목록
-1. React BootStrap
-2. Grommet
+### 📋이번 프로젝트에서 사용해본 라이브러리 목록
+1. faker.js (게시글, 상품 상세 정보 생성)
+2. React BootStrap
+3. Grommet
 - 시도했으나 실패한 라이브러리 목록 
-1. Slick (실패하여 직접 구현)
-2. Tailwind CSS
+4. Slick (실패하여 직접 구현)
+5. Tailwind CSS
 
 <br/>
 <br/>
