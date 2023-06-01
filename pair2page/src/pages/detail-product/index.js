@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useProduct } from '../../context/one-product'
-import { Data, DataSearch, DataTable, Toolbar } from 'grommet'
+import { Data, DataSearch, DataTable, Toolbar, Pagination } from 'grommet'
 import { useCart } from '../../context/cart'
 import AddReviewModal from '../../components/modal/add-review'
 import { useEffect, useState } from 'react'
@@ -13,7 +13,7 @@ const DetailProductPage = () => {
 	const ratingCount = Math.floor(targetProduct.AverageRating)
 	const [isOpenModal, setIsOpenModal] = useState(false)
 
-	const commentsArray = MockComments(Math.floor(Math.random() * 10) + 1)
+	const commentsArray = MockComments(Math.floor(Math.random() * 20) + 1)
 	const [comments, setComments] = useState(commentsArray)
 
 	// 모달창을 닫지 않은 채로 페이지를 나갔을 경우, 다른 페이지를 열었을 때 모달창이 닫힌 상태로 페이지가 열리게 하는 함수
@@ -78,6 +78,11 @@ const DetailProductPage = () => {
 									body: ['white', 'light-2'],
 									footer: { dark: 'light-2', light: 'dark-3' },
 								}}
+							/>
+							<Pagination
+								numberItems={comments.length}
+								step={5}
+								margin={{ left: '40%' }}
 							/>
 						</Data>
 					</ReviewBox>
