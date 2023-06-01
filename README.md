@@ -2,14 +2,11 @@
 
 ### 👩‍💻지성경
 
-- 역할: 상품 리스트(이미지 캐루셀, 게시글 상세페이지), 게시판 리스트(게시판 목록, 페이지네이션(x))
+- 역할: 메인 페이지 상품 리스트(이미지 캐루셀), 게시판 리스트, 게시글 상세 페이지(댓글 추가/삭제/수정, 페이지네이션(x))
 
 ### 👩‍💻함정우
 
 - 역할: 헤더(nav bar), 푸터, 상품 목록 페이지, 상품 상세 페이지(장바구니, 검색, 페이지네이션, 댓글 추가)
-
-<br/>
-<br/>
 
 ### 🖼️레퍼런스
 https://www.glossier.com/
@@ -20,13 +17,19 @@ https://www.glossier.com/
 - Main Page
   - 이미지 캐루셀
   - 게시판(게시글 상세 페이지, 댓글 추가/수정/삭제)
-  - nav bar (상품 목록 페이지로 이동 가능)
+  - nav bar (상품 목록 페이지로 이동 가능)<br/>
+  ![MainPage](https://github.com/FrontEnd-Team3/pair2/assets/123251211/e16ad4ec-52c6-4926-a708-0bfcac712f53)
+  <br/>
 - Product List Page
   - 카테고리별 상품 목록 페이지 연결
+  - Add 버튼 클릭 시 장바구니에 추가 (상품 상세 페이지도 동일)
+  - Logo 클릭 시 메인 페이지로 이동 (상품 상세 페이지도 동일)<br/>
+  ![ProductListPage](https://github.com/FrontEnd-Team3/pair2/assets/123251211/9a140a6e-9cdd-436c-93f3-4a6546bf7dba)
+  <br/>
 - Product Detail Page
   - 개별 상품 클릭 시 각 상품에 해당하는 상품 상세 페이지로 이동
-  - Add 버튼 클릭 시 장바구니에 추가
-  - 리뷰 게시판 (댓글 추가, 검색, 페이지네이션)
+  - 리뷰 게시판 (댓글 추가, 검색, 페이지네이션)<br/>
+  ![ProductDetailPage](https://github.com/FrontEnd-Team3/pair2/assets/123251211/d952af4c-97fe-4f72-a69a-3f136ff4fb1f)
 
 ### ⚙️관심사 분리 (Separation of Concerns)
 
