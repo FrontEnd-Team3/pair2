@@ -1,14 +1,21 @@
 import styled from 'styled-components'
-import { useProduct } from '../../context/one-product'
 import { Data, DataSearch, DataTable, Toolbar, Pagination } from 'grommet'
-import { useCart } from '../../context/cart'
 import AddReviewModal from '../../components/modal/add-review'
 import { useEffect, useState } from 'react'
 import { MockComments } from '../../data/faker'
+import { useDispatch, useSelector } from 'react-redux'
 
 const DetailProductPage = () => {
-	const { targetProduct } = useProduct()
-	const { cartCount, setCartCount } = useCart()
+	// const { targetProduct } = useProduct()
+	// const { cartCount, setCartCount } = useCart()
+	const targetProduct = useSelector(state => state.targetProduct)
+	const dispatch = useDispatch()
+	const handleAddCart = () => {
+		dispatch({
+			type: 'ADD_TO_CART',
+		})
+	}
+
 	// 별점 평균을 나타내는 숫자 (소수점 두 자리까지) 받아와서 소수점 이하를 버린 값만큼 별 출력
 	const ratingCount = Math.floor(targetProduct.AverageRating)
 	const [isOpenModal, setIsOpenModal] = useState(false)
@@ -40,7 +47,7 @@ const DetailProductPage = () => {
 							<ProductDetailBox>{targetProduct.productDetail}</ProductDetailBox>
 							<Rating>{'★'.repeat(ratingCount)}</Rating>
 							<div>
-								<AddToBagBtn onClick={() => setCartCount(cartCount + 1)}>
+								<AddToBagBtn onClick={() => handleAddCart()}>
 									Add to bag {targetProduct.price}
 								</AddToBagBtn>
 							</div>
