@@ -11,7 +11,9 @@ const MainPage = () => {
 			</MainImgBox>
 			<SubMainBox>
 				<TextBox>
-					<div>SKIN FIRST</div>
+					<div style={{ marginLeft: '60px', marginRight: '30px' }}>
+						SKIN FIRST
+					</div>
 					<div>MAKEUP SECOND</div>
 				</TextBox>
 				<Imgbox />
@@ -68,11 +70,13 @@ const SubMainBox = styled.div`
 `
 
 const TextBox = styled.div`
-	margin-top: 20px;
+	margin: 20px 0;
 	flex-direction: row;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-size: 20px;
+	font-weight: 200;
 `
 
 const SubMainImgBox = styled.div`

@@ -1,7 +1,8 @@
-import { Button } from 'reactstrap'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Imgbox = () => {
+	const navigate = useNavigate()
 	return (
 		<>
 			<SubMainImgBox>
@@ -9,8 +10,12 @@ const Imgbox = () => {
 				<img src="img/sub-menu-img-makeup.jpg" />
 			</SubMainImgBox>
 			<SubMainText>
-				<Button>Shop Skincare</Button>
-				<Button>Shop Makeup</Button>
+				<MainPageButton onClick={() => navigate('/product/skincare')}>
+					Shop Skincare
+				</MainPageButton>
+				<MainPageButton onClick={() => navigate('/product/makeup')}>
+					Shop Makeup
+				</MainPageButton>
 			</SubMainText>
 		</>
 	)
@@ -29,9 +34,19 @@ const SubMainImgBox = styled.div`
 `
 
 const SubMainText = styled.div`
+	width: 500px;
+	margin-left: 500px;
 	flex-direction: row;
 	display: flex;
-
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
+`
+
+const MainPageButton = styled.button`
+	margin-top: 20px;
+	width: 200px;
+	height: 50px;
+	background-color: darkgray;
+	border: none;
+	color: white;
 `

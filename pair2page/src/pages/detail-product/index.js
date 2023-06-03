@@ -1,19 +1,26 @@
 import styled from 'styled-components'
-import { useProduct } from '../../context/one-product'
-import { Data, DataSearch, DataTable, Toolbar } from 'grommet'
-import { useCart } from '../../context/cart'
+import { Data, DataSearch, DataTable, Toolbar, Pagination } from 'grommet'
 import AddReviewModal from '../../components/modal/add-review'
 import { useEffect, useState } from 'react'
 import { MockComments } from '../../data/faker'
+import { useDispatch, useSelector } from 'react-redux'
 
 const DetailProductPage = () => {
-	const { targetProduct } = useProduct()
-	const { cartCount, setCartCount } = useCart()
+	// const { targetProduct } = useProduct()
+	// const { cartCount, setCartCount } = useCart()
+	const targetProduct = useSelector(state => state.targetProduct)
+	const dispatch = useDispatch()
+	const handleAddCart = () => {
+		dispatch({
+			type: 'ADD_TO_CART',
+		})
+	}
+
 	// 별점 평균을 나타내는 숫자 (소수점 두 자리까지) 받아와서 소수점 이하를 버린 값만큼 별 출력
 	const ratingCount = Math.floor(targetProduct.AverageRating)
 	const [isOpenModal, setIsOpenModal] = useState(false)
 
-	const commentsArray = MockComments(Math.floor(Math.random() * 10) + 1)
+	const commentsArray = MockComments(Math.floor(Math.random() * 20) + 1)
 	const [comments, setComments] = useState(commentsArray)
 
 	// 모달창을 닫지 않은 채로 페이지를 나갔을 경우, 다른 페이지를 열었을 때 모달창이 닫힌 상태로 페이지가 열리게 하는 함수
@@ -40,7 +47,7 @@ const DetailProductPage = () => {
 							<ProductDetailBox>{targetProduct.productDetail}</ProductDetailBox>
 							<Rating>{'★'.repeat(ratingCount)}</Rating>
 							<div>
-								<AddToBagBtn onClick={() => setCartCount(cartCount + 1)}>
+								<AddToBagBtn onClick={() => handleAddCart()}>
 									Add to bag {targetProduct.price}
 								</AddToBagBtn>
 							</div>
@@ -78,6 +85,11 @@ const DetailProductPage = () => {
 									body: ['white', 'light-2'],
 									footer: { dark: 'light-2', light: 'dark-3' },
 								}}
+							/>
+							<Pagination
+								numberItems={comments.length}
+								step={5}
+								margin={{ left: '40%' }}
 							/>
 						</Data>
 					</ReviewBox>

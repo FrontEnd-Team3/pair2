@@ -1,17 +1,29 @@
 import styled from 'styled-components'
 import { MockProductsDetail } from '../../data/faker'
 import { Box, Grid } from 'grommet'
-import { useCart } from '../../context/cart'
-import { useProduct } from '../../context/one-product'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 const ProductList = () => {
-	const { cartCount, setCartCount } = useCart()
+	// const { cartCount, setCartCount } = useCart()
+	const dispatch = useDispatch()
+
+	const handleAddCart = () => {
+		dispatch({
+			type: 'ADD_TO_CART',
+		})
+	}
+
 	const products = MockProductsDetail(24)
-	const { setTargetProduct } = useProduct()
+
+	// const { setTargetProduct } = useProduct()
 	const navigate = useNavigate()
 	const handlePageChange = (product, id) => {
-		setTargetProduct(product)
+		// setTargetProduct(product)
+		dispatch({
+			type: 'SELECT_PRODUCT',
+			payload: product,
+		})
 		navigate(`/detail/${id}`)
 	}
 	return (
@@ -66,7 +78,7 @@ const ProductList = () => {
 							<ProductBottom>{product.productDetail}</ProductBottom>
 						</div>
 						<div>
-							<AddToBagBtn onClick={() => setCartCount(cartCount + 1)}>
+							<AddToBagBtn onClick={() => handleAddCart()}>
 								Add to bag
 							</AddToBagBtn>
 						</div>

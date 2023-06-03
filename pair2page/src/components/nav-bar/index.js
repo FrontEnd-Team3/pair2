@@ -5,8 +5,7 @@ import { useNav } from '../../context/navcontent'
 import NavDetail from '../../data/navbar-data.json'
 
 // image
-import MainLogo1 from '../../img/main-logo.png'
-import MainLogo2 from '../../img/main-img1.png'
+
 import ArrowImage from '../../img/arrow.png'
 import SkincareImage from '../../img/SKINCARE.jpg'
 import MakeupImage from '../../img/MAKEUP.jpg'
@@ -14,24 +13,14 @@ import BodyImage from '../../img/BODY.jpg'
 import FragranceImage from '../../img/FRAGRANCE.jpg'
 import SetsImage from '../../img/SETS.jpg'
 import { useNavigate } from 'react-router-dom'
-import { useCart } from '../../context/cart'
+import { useSelector } from 'react-redux'
+import HeaderLogoImage from './main-logo'
 
 const NavBar = args => {
 	const [isOpen, setIsOpen] = useState(false)
 	// const [selectedMenu, setSelectedMenu] = useState('SKINCARE')
 	const { content, setContent, initialValue } = useNav()
 	const selectedVal = useRef(content)
-
-	// 마우스 올리면 헤더 로고 이미지 변경되는 효과 구현
-	const [headerImage, setHeaderImage] = useState(MainLogo1)
-
-	const handleLogoChange = () => {
-		setHeaderImage(MainLogo2)
-	}
-
-	const handleLogoReset = () => {
-		setHeaderImage(MainLogo1)
-	}
 
 	// ReactStrap을 사용한 navbar > 마우스 올리면 해당 값에 맞게 내부 컨텐츠 변화하는 효과 구현
 	const handleToggleOpen = e => {
@@ -75,18 +64,13 @@ const NavBar = args => {
 	}
 
 	// 장바구니
-	const { cartCount } = useCart()
+	// const { cartCount } = useCart()
+	const cartCount = useSelector(state => state.cart)
 
 	return (
 		<Container>
 			<Navbar {...args}>
-				<HeaderLogo
-					on
-					src={headerImage}
-					onMouseEnter={handleLogoChange}
-					onMouseLeave={handleLogoReset}
-					onClick={() => navigate('/')}
-				/>
+				<HeaderLogoImage />
 				<CenterMenuList>
 					<EachMenu onMouseEnter={handleToggleOpen} id="SKINCARE">
 						SKINCARE
@@ -176,12 +160,6 @@ const HeaderBottom = styled.div`
 	justify-content: space-between;
 `
 
-const HeaderLogo = styled.img`
-	width: 75px;
-	height: 20px;
-	margin-top: -10px;
-	padding: 0px;
-`
 const CenterMenuList = styled.ul`
 	list-style: none;
 	display: flex;
